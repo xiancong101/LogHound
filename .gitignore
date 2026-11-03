@@ -1,0 +1,35 @@
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+
+# 虚拟环境
+.venv/
+venv/
+env/
+
+# 构建产物
+build/
+dist/
+
+# 测试与覆盖率
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 生成的假数据
+data/
+
+# IDE / 编辑器
+.idea/
+.vscode/
+*.swp
+
+# 其他
+.DS_Store

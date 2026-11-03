@@ -1,0 +1,5 @@
+2026-11-18 14:00:01 INFO  User login success: alice
+2026-11-18 14:00:05 WARN  Failed password for user root from 192.168.1.10
+2026-11-18 14:00:12 ERROR 500 Internal Server Error at /api/orders
+2026-11-18 14:00:20 INFO  Request completed in 42ms
+2026-11-18 14:00:33 ERROR Connection refused to database

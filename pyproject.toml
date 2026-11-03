@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "loghawk"
+version = "0.1.0"
+description = "日志异常检测与告警引擎"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "LogHawk Team" }]
+keywords = ["logging", "anomaly-detection", "alerting", "monitoring"]
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+web = ["Flask>=3.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+loghawk = "cli:main"
+
+[tool.setuptools]
+packages = [
+    "loghawk",
+    "loghawk.parser",
+    "loghawk.rules",
+    "loghawk.baseline",
+    "loghawk.output",
+]
+py-modules = ["cli", "config"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
