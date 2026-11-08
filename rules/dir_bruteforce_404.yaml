@@ -1,0 +1,15 @@
+id: dir_bruteforce_404
+name: 目录爆破（高 404 比例）
+severity: medium
+attack: T1595.002
+match:
+  log_type: nginx
+  status: [404]
+window:
+  seconds: 300
+  threshold: 50
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 900
+description: 同一 IP 在 5 分钟内触发 404 超过 50 次，疑似目录/文件爆破扫描。

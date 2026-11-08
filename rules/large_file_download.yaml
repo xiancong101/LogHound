@@ -1,0 +1,15 @@
+id: large_file_download
+name: 大文件下载
+severity: low
+attack: T1020
+match:
+  log_type: nginx
+  min_size: 10485760
+window:
+  seconds: 300
+  threshold: 5
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 900
+description: 单 IP 在 5 分钟内下载超 10MB 文件 5 次以上，疑似数据外泄。

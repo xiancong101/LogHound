@@ -1,0 +1,14 @@
+id: scanner_ua_dirsearch
+name: 扫描器 UA — dirsearch
+severity: high
+attack: T1595.002
+match:
+  ua_regex: "dirsearch"
+window:
+  seconds: 60
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 检测到 dirsearch 特征 User-Agent，疑似目录爆破扫描。

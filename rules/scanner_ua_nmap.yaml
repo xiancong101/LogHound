@@ -1,0 +1,14 @@
+id: scanner_ua_nmap
+name: 扫描器 UA — nmap
+severity: medium
+attack: T1595.001
+match:
+  ua_regex: "nmap"
+window:
+  seconds: 60
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 检测到 nmap 特征 User-Agent，疑似端口/服务扫描。

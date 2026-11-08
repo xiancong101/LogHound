@@ -1,0 +1,14 @@
+id: webshell_access
+name: WebShell 访问探测
+severity: high
+attack: T1505.003
+match:
+  path_regex: "/(cmd|shell|shell|backdoor|webshell|1|xx|mm|q|hack)\\.(php|jsp|asp|aspx)(\\?|$)|eval\\(|assert\\("
+window:
+  seconds: 300
+  threshold: 3
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 600
+description: "访问疑似 WebShell 文件(如 cmd.php、shell.php、backdoor.php)或含 eval( / assert( 的路径，疑似后门访问。"

@@ -1,0 +1,14 @@
+id: scanner_ua_awvs
+name: 扫描器 UA — AWVS
+severity: high
+attack: T1595.002
+match:
+  ua_regex: "Acunetix|awvs"
+window:
+  seconds: 60
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 检测到 AWVS(Acunetix) 特征 User-Agent，疑似 Web 漏洞扫描。

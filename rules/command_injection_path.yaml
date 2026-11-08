@@ -1,0 +1,14 @@
+id: command_injection_path
+name: 命令执行特征
+severity: high
+attack: T1059
+match:
+  path_regex: ";|\\||`|\\$\\(|\\(\\)"
+window:
+  seconds: 60
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 请求路径含 ; | ` $() 等命令执行/拼接特征，疑似命令注入。

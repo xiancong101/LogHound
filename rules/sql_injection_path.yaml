@@ -1,0 +1,14 @@
+id: sql_injection_path
+name: SQL 注入特征
+severity: high
+attack: T1190
+match:
+  path_regex: "union\\s+select|'\\s+or\\s+1=1|or\\s+1=1|--"
+window:
+  seconds: 60
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 请求路径含 union select / ' or 1=1 等 SQL 注入特征，疑似注入攻击。

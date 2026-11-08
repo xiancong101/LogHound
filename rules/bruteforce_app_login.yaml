@@ -1,0 +1,16 @@
+id: bruteforce_app_login
+name: 应用登录暴力破解
+severity: high
+attack: T1110.001
+match:
+  log_type: app
+  path_regex: "/login"
+  status: [401, 403]
+window:
+  seconds: 300
+  threshold: 15
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 600
+description: 同一 IP 在 5 分钟内对登录接口触发 401/403 超过 15 次，疑似应用口令爆破。

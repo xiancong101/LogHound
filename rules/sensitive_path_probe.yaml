@@ -1,0 +1,14 @@
+id: sensitive_path_probe
+name: 敏感路径探测
+severity: medium
+attack: T1083
+match:
+  path_regex: "/(admin|administrator|\\.git|\\.env|phpmyadmin|actuator|wp-admin)(/|$)"
+window:
+  seconds: 300
+  threshold: 10
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 900
+description: 同一 IP 在 5 分钟内探测敏感路径(/admin、/.git、/.env、/phpmyadmin、/actuator 等)超 10 次，疑似信息收集。

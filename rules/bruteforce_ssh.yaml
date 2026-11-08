@@ -1,0 +1,14 @@
+id: bruteforce_ssh
+name: SSH 暴力破解
+severity: high
+attack: T1110.001
+match:
+  log_type: ssh
+window:
+  seconds: 300
+  threshold: 10
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 600
+description: 同一 IP 在 5 分钟内 SSH 登录失败超过 10 次，疑似口令爆破。

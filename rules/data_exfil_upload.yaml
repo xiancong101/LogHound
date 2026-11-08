@@ -1,0 +1,16 @@
+id: data_exfil_upload
+name: 异常大体积上传
+severity: medium
+attack: T1048
+match:
+  log_type: nginx
+  method: [POST, PUT]
+  min_size: 52428800
+window:
+  seconds: 300
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 900
+description: 单 IP 通过 POST/PUT 上传超 50MB 数据，疑似异常数据外传或恶意上传。

@@ -1,0 +1,14 @@
+id: scanner_ua_sqlmap
+name: 扫描器 UA — sqlmap
+severity: high
+attack: T1595.002
+match:
+  ua_regex: "sqlmap"
+window:
+  seconds: 60
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 检测到 sqlmap 特征 User-Agent，疑似 SQL 注入自动化扫描。

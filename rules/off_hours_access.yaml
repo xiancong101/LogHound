@@ -1,0 +1,15 @@
+id: off_hours_access
+name: 非工作时间访问
+severity: low
+attack: null
+match:
+  log_type: app
+  path_regex: "/admin|/console|/manage"
+window:
+  seconds: 600
+  threshold: 3
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 3600
+description: 同一 IP 在非工作时间(10 分钟窗)访问管理接口超 3 次，需结合业务时段研判。

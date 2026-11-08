@@ -1,0 +1,14 @@
+id: path_traversal
+name: 路径遍历攻击
+severity: high
+attack: T1006
+match:
+  path_regex: "\\.\\./|\\.\\.%2f|/etc/passwd|win\\.ini|boot\\.ini"
+window:
+  seconds: 60
+  threshold: 1
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 请求路径含 ../ /etc/passwd 等路径遍历特征，疑似任意文件读取。

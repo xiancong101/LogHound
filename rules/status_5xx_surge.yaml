@@ -1,0 +1,14 @@
+id: status_5xx_surge
+name: 5xx 状态码突增
+severity: medium
+attack: null
+match:
+  status: [500, 502, 503, 504]
+window:
+  seconds: 60
+  threshold: 30
+  group_by: none
+  sliding: true
+suppress:
+  seconds: 300
+description: 60 秒内 5xx 服务器错误超过 30 次，疑似服务异常或压力攻击。

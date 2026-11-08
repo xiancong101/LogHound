@@ -1,0 +1,14 @@
+id: high_freq_single_ip
+name: 单 IP 高频请求
+severity: low
+attack: T1499
+match:
+  log_type: nginx
+window:
+  seconds: 60
+  threshold: 500
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: 单 IP 在 60 秒内请求超 500 次，疑似刷接口或资源耗尽攻击。

@@ -1,0 +1,14 @@
+id: xss_path_feature
+name: XSS 攻击特征
+severity: medium
+attack: T1059.007
+match:
+  path_regex: "<script|javascript:|onerror=|onload="
+window:
+  seconds: 60
+  threshold: 3
+  group_by: ip
+  sliding: true
+suppress:
+  seconds: 300
+description: "请求路径含 <script / javascript: / onerror= 等 XSS 特征，疑似跨站脚本攻击。"
