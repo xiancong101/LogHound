@@ -1,0 +1,11 @@
+rules_dir: rules/
+db_path: loghawk.db
+webhook_url: null
+baseline:
+  enabled: true
+  z_threshold: 3.0
+  burst_ratio: 3.0
+output:
+  console: true
+  webhook: false
+  prometheus_port: null
