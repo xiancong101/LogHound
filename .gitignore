@@ -33,3 +33,7 @@ data/
 
 # 其他
 .DS_Store
+
+# local scratch scripts
+_*.py
+_git_before.txt
