@@ -9,7 +9,7 @@ description = "日志异常检测与告警引擎"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-authors = [{ name = "LogHawk Team" }]
+authors = [{ name = "花放", email = "2971421830@qq.com" }]
 keywords = ["logging", "anomaly-detection", "alerting", "monitoring"]
 dependencies = [
     "PyYAML>=6.0",

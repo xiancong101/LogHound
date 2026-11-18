@@ -1,0 +1,6 @@
+﻿f5ab997 LogHawk Developer dev@loghawk.local 2026-11-17 16:45:00 +0800 docs: 重写 README 并新增贡献指南
+b85a773 LogHawk Developer dev@loghawk.local 2026-11-14 22:15:00 +0800 feat(output): 实现告警输出模块与命令行入口
+771d88e LogHawk Developer dev@loghawk.local 2026-11-11 14:30:00 +0800 feat(baseline): 实现统计基线异常检测
+cfd34af LogHawk Developer dev@loghawk.local 2026-11-08 20:05:00 +0800 feat(rules): 实现规则引擎与 20 条内置检测规则
+1a5d3a7 LogHawk Developer dev@loghawk.local 2026-11-05 15:40:00 +0800 feat(parser): 实现日志解析模块
+62e76a6 LogHawk Developer dev@loghawk.local 2026-11-03 10:12:00 +0800 chore: 初始化 LogHawk 项目骨架
