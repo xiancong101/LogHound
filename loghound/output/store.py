@@ -1,18 +1,4 @@
-"""SQLite 告警落库：把告警写入 alerts 表。
-
-表结构：:
-
-    alerts(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        ts TEXT,
-        rule_id TEXT,
-        severity TEXT,
-        group_value TEXT,
-        count INTEGER,
-        detail_json TEXT,
-        attack TEXT
-    )
-"""
+"""告警写入 SQLite。表结构见下面 _SCHEMA，字段和 Alert 一一对应。"""
 
 from __future__ import annotations
 

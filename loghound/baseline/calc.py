@@ -1,13 +1,8 @@
-"""基线异常打分：z-score 与短时突增的综合评分。
+"""基线打分：z-score 配合短时突增比。
 
-打分模型：
-    - ``z = (current - mean) / std``，当 ``std`` 为 0（或缺失）时视为 1，
-      避免除零；当前值超出均值 3σ 视为异常。
-    - 短时突增 ``burst_ratio = recent_5min / prev_5min``，比值 > 3 记为突增。
-    - 综合分 ``score = w_z * z + w_burst * burst_ratio``（权重可配置）。
-
-判定 ``is_anomaly``：``z > z_threshold``（默认 3.0）或
-``burst_ratio > burst_threshold``（默认 3.0），阈值均可配置。
+单独看 z-score 会把业务波峰全判成异常，所以再叠一个 burst_ratio
+（近 5 分钟量 / 前 5 分钟量）做交叉验证，两个都超才算异常。
+std 为 0 时按 STD_FALLBACK 处理，不然会除零。
 """
 
 from __future__ import annotations
