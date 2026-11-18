@@ -71,14 +71,14 @@ class DetectionEngine:
             if not match_rule(rule, event):
                 continue
             key = extract_group_key(rule, event)
-            state = self._get_state(rule.id, key)
+            state = self._state_for(rule.id, key)
             alert = self._update(rule, state, ts)
             if alert is not None:
                 yield alert
 
     # ---- 内部 ----
 
-    def _get_state(self, rule_id: str, group_value: str) -> WindowState:
+    def _state_for(self, rule_id: str, group_value: str) -> WindowState:
         """获取或创建窗口状态。"""
         k = (rule_id, group_value)
         state = self._states.get(k)

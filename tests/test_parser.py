@@ -13,7 +13,7 @@ from __future__ import annotations
 import gzip
 from pathlib import Path
 
-from loghawk.parser import (
+from loghound.parser import (
     iter_events,
     parse_app,
     parse_nginx,

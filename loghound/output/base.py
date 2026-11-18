@@ -1,8 +1,8 @@
 """告警输出抽象基类与统一的 Alert 数据结构。
 
 output 模块消费两种来源的告警：
-- 规则引擎（``loghawk.rules``）产出的告警，含 rule_id / severity / attack / count。
-- 基线引擎（``loghawk.baseline``）产出的异常，含 ip / z / burst_ratio。
+- 规则引擎（``loghound.rules``）产出的告警，含 rule_id / severity / attack / count。
+- 基线引擎（``loghound.baseline``）产出的异常，含 ip / z / burst_ratio。
 
 :class:`Alert` 是两者的统一中间结构，各输出后端（console / webhook /
 store / metrics）只需消费这一种类型。

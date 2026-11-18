@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "loghawk"
+name = "loghound"
 version = "0.1.0"
 description = "日志异常检测与告警引擎"
 readme = "README.md"
@@ -20,15 +20,15 @@ web = ["Flask>=3.0"]
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-loghawk = "cli:main"
+loghound = "cli:main"
 
 [tool.setuptools]
 packages = [
-    "loghawk",
-    "loghawk.parser",
-    "loghawk.rules",
-    "loghawk.baseline",
-    "loghawk.output",
+    "loghound",
+    "loghound.parser",
+    "loghound.rules",
+    "loghound.baseline",
+    "loghound.output",
 ]
 py-modules = ["cli", "config"]
 

@@ -64,7 +64,7 @@ def iter_events(
     path_list = _normalize_paths(paths)
 
     for path in path_list:
-        opener = _open(path)
+        opener = _open_stream(path)
         try:
             for raw_line in opener:
                 stats.total += 1
@@ -101,7 +101,7 @@ def _normalize_paths(paths: str | Path | list[str | Path]) -> list[Path]:
     return [Path(p) for p in paths]
 
 
-def _open(path: Path):
+def _open_stream(path: Path):
     """按扩展名返回文本或 gzip 文件对象（惰性、可逐行迭代）。"""
     if path.suffix == ".gz":
         return gzip.open(path, "rt", encoding="utf-8", errors="replace")

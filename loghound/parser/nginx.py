@@ -58,10 +58,10 @@ def parse_nginx(line: str) -> dict[str, Any] | None:
         # 时间解析失败也走备通道，避免主通道半途失效
 
     # —— 备通道：分隔符切分 ——
-    return _parse_nginx_by_split(raw)
+    return _parse_by_split(raw)
 
 
-def _parse_nginx_by_split(raw: str) -> dict[str, Any] | None:
+def _parse_by_split(raw: str) -> dict[str, Any] | None:
     """分隔符切分兜底：按结构定位关键字段，不依赖固定索引。
 
     由于 ``[12/Mar/2025:10:23:45 +0800]`` 中的空格会被 ``split()`` 拆开，

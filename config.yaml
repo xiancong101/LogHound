@@ -1,5 +1,5 @@
 rules_dir: rules/
-db_path: loghawk.db
+db_path: loghound.db
 webhook_url: null
 baseline:
   enabled: true

@@ -1,4 +1,4 @@
-"""LogHawk 命令行入口。
+"""LogHound 命令行入口。
 
 子命令：
     parse <logfile...>                只解析打印（调试）
@@ -17,21 +17,21 @@ from pathlib import Path
 
 from config import Config, load_config
 
-from loghawk.output import (
+from loghound.output import (
     ConsoleOutput,
     MetricsOutput,
     StoreOutput,
     WebhookOutput,
     alert_from_rule,
 )
-from loghawk.parser import ParseStats, iter_events
-from loghawk.rules import DetectionEngine, RuleLoader, RuleSet
+from loghound.parser import ParseStats, iter_events
+from loghound.rules import DetectionEngine, RuleLoader, RuleSet
 
 
 def build_parser() -> argparse.ArgumentParser:
     """构建命令行参数解析器。"""
     parser = argparse.ArgumentParser(
-        prog="loghawk",
+        prog="loghound",
         description="日志异常检测与告警引擎",
     )
     parser.add_argument("--config", default="config.yaml", help="配置文件路径（默认 config.yaml）")
@@ -169,7 +169,7 @@ def cmd_tail(args, config: Config) -> int:
 
 def _parse_single(line: str):
     """解析单行日志（复用 parser 的 sniff + 对应解析器）。"""
-    from loghawk.parser import parse_app, parse_nginx, parse_ssh, sniff_type
+    from loghound.parser import parse_app, parse_nginx, parse_ssh, sniff_type
 
     log_type = sniff_type(line)
     if log_type == "nginx":
@@ -200,7 +200,7 @@ def cmd_eval(args, config: Config) -> int:
     sys.path.insert(0, str(Path(__file__).resolve().parent / "scripts"))
     from offline_eval import build_baselines, load_points, to_eval_points
 
-    from loghawk.baseline import format_report, run_evaluation
+    from loghound.baseline import format_report, run_evaluation
 
     data_dir = Path("data")
     normal_path = data_dir / "normal_logs.jsonl"

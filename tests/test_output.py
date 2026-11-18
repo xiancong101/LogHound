@@ -16,7 +16,7 @@ import tempfile
 import threading
 from pathlib import Path
 
-from loghawk.output import (
+from loghound.output import (
     Alert,
     ConsoleOutput,
     MetricsOutput,
@@ -117,14 +117,14 @@ def test_metrics_prometheus_format() -> None:
     m.send(Alert(severity="high", rule_id="bruteforce_ssh", group_value="10.0.0.5", count=12))
     m.send(Alert(severity="high", rule_id="bruteforce_ssh", group_value="10.0.0.6", count=15))
     text = m.render_metrics()
-    assert "# TYPE loghawk_alerts_total counter" in text
-    assert 'loghawk_alerts_total{severity="high",rule_id="bruteforce_ssh"} 2' in text
-    assert 'loghawk_alerts_last_count{rule_id="bruteforce_ssh",group_value="10.0.0.6"} 15' in text
+    assert "# TYPE loghound_alerts_total counter" in text
+    assert 'loghound_alerts_total{severity="high",rule_id="bruteforce_ssh"} 2' in text
+    assert 'loghound_alerts_last_count{rule_id="bruteforce_ssh",group_value="10.0.0.6"} 15' in text
 
 
 def test_alert_from_rule_conversion() -> None:
     """规则告警转统一告警结构。"""
-    from loghawk.rules.models import Alert as RuleAlert
+    from loghound.rules.models import Alert as RuleAlert
 
     ra = RuleAlert(
         rule_id="bruteforce_ssh",

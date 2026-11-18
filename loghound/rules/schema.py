@@ -77,7 +77,7 @@ def validate_rule(raw: dict[str, Any], source: str) -> list[SchemaError]:
             for key in match:
                 if key not in _MATCH_FIELDS:
                     errors.append(SchemaError(source, f"match.{key}", "未知字段"))
-            _check_match(errors, match, source)
+            _validate_match(errors, match, source)
 
     # 4) window 子字段
     if "window" in raw:
@@ -88,7 +88,7 @@ def validate_rule(raw: dict[str, Any], source: str) -> list[SchemaError]:
             for key in window:
                 if key not in _WINDOW_FIELDS:
                     errors.append(SchemaError(source, f"window.{key}", "未知字段"))
-            _check_window(errors, window, source)
+            _validate_window(errors, window, source)
 
     # 5) suppress 子字段
     if "suppress" in raw:
@@ -105,7 +105,7 @@ def validate_rule(raw: dict[str, Any], source: str) -> list[SchemaError]:
     return errors
 
 
-def _check_match(errors: list[SchemaError], match: dict, source: str) -> None:
+def _validate_match(errors: list[SchemaError], match: dict, source: str) -> None:
     """校验 match 各字段的类型与取值范围。"""
     if "log_type" in match and match["log_type"] is not None:
         if match["log_type"] not in _LOG_TYPES:
@@ -130,7 +130,7 @@ def _check_match(errors: list[SchemaError], match: dict, source: str) -> None:
         _check_int(errors, match, source, "min_size", display="match.min_size", min_value=0)
 
 
-def _check_window(errors: list[SchemaError], window: dict, source: str) -> None:
+def _validate_window(errors: list[SchemaError], window: dict, source: str) -> None:
     """校验 window 各字段。"""
     _check_int(errors, window, source, "seconds", display="window.seconds", min_value=1)
     _check_int(errors, window, source, "threshold", display="window.threshold", min_value=1)

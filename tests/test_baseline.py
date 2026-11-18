@@ -13,15 +13,15 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
-from loghawk.baseline import (
+from loghound.baseline import (
     Baseline,
     BaselineStore,
     EvalPoint,
-    compute_burst_ratio,
-    compute_z,
     evaluate_baseline_3sigma,
     evaluate_fixed_threshold,
     score,
+    compute_spike_ratio,
+    compute_zscore,
 )
 
 
@@ -43,20 +43,20 @@ def test_sliding_average_update() -> None:
         store.close()
 
 
-def test_compute_z_zero_std() -> None:
+def test_zscore_zero_std() -> None:
     """std=0 时 z 计算用 1 代替，避免除零。"""
-    assert compute_z(105.0, 100.0, 0.0) == 5.0  # (105-100)/1
-    assert compute_z(100.0, 100.0, 0.0) == 0.0
-    assert compute_z(110.0, 100.0, 5.0) == 2.0
+    assert compute_zscore(105.0, 100.0, 0.0) == 5.0  # (105-100)/1
+    assert compute_zscore(100.0, 100.0, 0.0) == 0.0
+    assert compute_zscore(110.0, 100.0, 5.0) == 2.0
 
 
-def test_compute_burst_ratio() -> None:
+def test_spike_ratio() -> None:
     """突增比：recent/prev，prev=0 的边界。"""
-    assert compute_burst_ratio(90.0, 30.0) == 3.0
-    assert compute_burst_ratio(0.0, 30.0) == 0.0
+    assert compute_spike_ratio(90.0, 30.0) == 3.0
+    assert compute_spike_ratio(0.0, 30.0) == 0.0
     # prev=0 且 recent>0 视为强突增
-    assert compute_burst_ratio(50.0, 0.0) == 50.0
-    assert compute_burst_ratio(0.0, 0.0) == 0.0
+    assert compute_spike_ratio(50.0, 0.0) == 50.0
+    assert compute_spike_ratio(0.0, 0.0) == 0.0
 
 
 def test_score_is_anomaly() -> None:

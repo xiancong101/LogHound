@@ -1,8 +1,8 @@
 """Prometheus 指标输出：提供 /metrics 端点（可选 Flask），输出文本格式。
 
 导出两类指标：
-- ``loghawk_alerts_total{severity, rule_id}``：累计告警数（计数器）。
-- ``loghawk_alerts_last_count{rule_id, group_value}``：最近一次告警的命中数。
+- ``loghound_alerts_total{severity, rule_id}``：累计告警数（计数器）。
+- ``loghound_alerts_last_count{rule_id, group_value}``：最近一次告警的命中数。
 
 不依赖 Flask：核心是 :func:`render_metrics` 生成 Prometheus 文本；
 Flask 只在需要 HTTP 端点时使用（``serve``）。
@@ -16,8 +16,8 @@ from typing import Callable, Optional
 from .base import Alert, OutputBackend
 
 # Prometheus 指标名（合法：字母数字 + 下划线）
-METRIC_ALERTS_TOTAL = "loghawk_alerts_total"
-METRIC_ALERTS_LAST_COUNT = "loghawk_alerts_last_count"
+METRIC_ALERTS_TOTAL = "loghound_alerts_total"
+METRIC_ALERTS_LAST_COUNT = "loghound_alerts_last_count"
 
 
 def _escape_label(value: str) -> str:

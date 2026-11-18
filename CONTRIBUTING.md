@@ -4,7 +4,7 @@
 
 ## 提交新规则的步骤
 
-1. **确认规则不重复**：先看 `rules/` 目录里是否已有覆盖同样场景的规则（`loghawk rules list` 可快速查看）。
+1. **确认规则不重复**：先看 `rules/` 目录里是否已有覆盖同样场景的规则（`loghound rules list` 可快速查看）。
 
 2. **复制模板**：以 `rules/bruteforce_ssh.yaml` 为蓝本，或使用 README 里的 5 行模板，新建一个 `.yaml` 文件。
 
@@ -21,10 +21,10 @@
 
    ```bash
    # 确认能加载、schema 校验通过
-   loghawk rules list
+   loghound rules list
 
    # 用样例日志跑一遍，确认规则能按预期触发
-   loghawk run samples/attack.log --rules rules/
+   loghound run samples/attack.log --rules rules/
    ```
 
 6. **写测试**（规则涉及新的匹配逻辑时建议）：在 `tests/test_rules.py` 里补一个用例，验证规则在构造的事件序列上能触发/不触发。
@@ -44,12 +44,12 @@
 
 ## 目录约定
 
-- 用户规则放顶层 `rules/` 目录，**不要**放到 `loghawk/rules/`（那是规则引擎的代码模块）。
+- 用户规则放顶层 `rules/` 目录，**不要**放到 `loghound/rules/`（那是规则引擎的代码模块）。
 - 内置规则与用户自定义规则目前都在同一个 `rules/` 目录下。注意：加载器只读取 `rules/` 目录**一级**下的 `*.yaml` / `*.yml` 文件，**不会递归读取子目录**，所以规则文件请直接放在 `rules/` 根下。
 
 ## 代码贡献
 
-如果改动规则引擎本身（`loghawk/rules/` 下的代码），请：
+如果改动规则引擎本身（`loghound/rules/` 下的代码），请：
 
 - 保持纯标准库 + PyYAML 的依赖约束。
 - 新增功能补测试。

@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from loghawk.rules import (
+from loghound.rules import (
     DetectionEngine,
     RuleLoader,
     RuleLoadError,
@@ -89,7 +89,7 @@ def test_sliding_window_triggers_alert() -> None:
 def test_fixed_window_resets_on_new_bucket() -> None:
     """固定窗口模式：跨分片清空重计，不累计到告警。"""
     # 构造一个固定窗口规则：60 秒窗口、阈值 3
-    from loghawk.rules.models import Match, Rule, Suppress, Window
+    from loghound.rules.models import Match, Rule, Suppress, Window
 
     rule = Rule(
         id="fixed_test",
@@ -137,7 +137,7 @@ def test_hot_reload_on_mtime_change(tmp_path: Path) -> None:
 
 def test_suppress_limits_duplicate_alerts() -> None:
     """告警抑制：同一 group_value 在 suppress 秒内只报一次。"""
-    from loghawk.rules.models import Match, Rule, Suppress, Window
+    from loghound.rules.models import Match, Rule, Suppress, Window
 
     rule = Rule(
         id="suppress_test",

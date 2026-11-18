@@ -24,7 +24,7 @@ from pathlib import Path
 # 允许直接以 ``python scripts/offline_eval.py`` 方式运行：把项目根目录加入 sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from loghawk.baseline import (
+from loghound.baseline import (
     Baseline,
     EvalPoint,
     format_report,

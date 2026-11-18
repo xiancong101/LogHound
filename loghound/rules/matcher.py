@@ -7,7 +7,7 @@
     - ``path_regex`` / ``ua_regex``：正则命中（可选）
     - ``min_size``：响应体大小 >= 阈值（可选）
 
-事件输入为 parser 模块产出的统一 dict（见 ``loghawk.parser``）。
+事件输入为 parser 模块产出的统一 dict（见 ``loghound.parser``）。
 """
 
 from __future__ import annotations

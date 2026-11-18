@@ -54,7 +54,7 @@ class ScoreResult:
         }
 
 
-def compute_z(current: float, mean: float, std: float) -> float:
+def compute_zscore(current: float, mean: float, std: float) -> float:
     """计算 z-score；std 为 0 或缺失时用 STD_FALLBACK 代替。"""
     if std is None:
         std = STD_FALLBACK
@@ -63,7 +63,7 @@ def compute_z(current: float, mean: float, std: float) -> float:
     return (current - mean) / std
 
 
-def compute_burst_ratio(recent: float, prev: float) -> float:
+def compute_spike_ratio(recent: float, prev: float) -> float:
     """计算短时突增比：最近 5 分钟量 / 前 5 分钟量。
 
     前一时段为 0 时：若当前有量则视为强突增（返回较大值），
@@ -99,10 +99,10 @@ def score(
         prev: 前 5 分钟的请求量。
         z_threshold / burst_threshold / w_z / w_burst: 阈值与权重（可配置）。
     """
-    z = compute_z(current, mean, std)
-    burst_ratio = compute_burst_ratio(recent, prev)
-    combined = w_z * z + w_burst * burst_ratio
-    is_anomaly = (z > z_threshold) or (burst_ratio > burst_threshold)
+    z = compute_zscore(current, mean, std)
+    burst = compute_spike_ratio(recent, prev)
+    combined = w_z * z + w_burst * burst
+    is_anomaly = (z > z_threshold) or (burst > burst_threshold)
 
     return ScoreResult(
         ip=ip,
@@ -111,7 +111,7 @@ def score(
         mean=mean,
         std=std,
         z=z,
-        burst_ratio=burst_ratio,
+        burst_ratio=burst,
         score=combined,
         is_anomaly=is_anomaly,
     )

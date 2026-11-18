@@ -46,7 +46,7 @@ def parse_app(line: str) -> dict[str, Any] | None:
     raw = line.rstrip("\n")
 
     # —— 主通道：JSON 解析 ——
-    obj = _try_loads(raw)
+    obj = _try_json(raw)
     if obj is not None:
         ts_raw = _pick(obj, _KEY_ALIASES["ts"])
         ts = to_iso8601(str(ts_raw)) if ts_raw is not None else None
@@ -65,10 +65,10 @@ def parse_app(line: str) -> dict[str, Any] | None:
             )
 
     # —— 备通道：分隔符切分 ——
-    return _parse_app_by_split(raw)
+    return _kv_fallback(raw)
 
 
-def _parse_app_by_split(raw: str) -> dict[str, Any] | None:
+def _kv_fallback(raw: str) -> dict[str, Any] | None:
     """分隔符切分兜底：对 ``key=value`` 或 ``key:value`` 风格的行提取字段。"""
     tokens = raw.split()
     fields: dict[str, Any] = {}
@@ -100,7 +100,7 @@ def _parse_app_by_split(raw: str) -> dict[str, Any] | None:
     )
 
 
-def _try_loads(text: str) -> dict[str, Any] | None:
+def _try_json(text: str) -> dict[str, Any] | None:
     """安全地 ``json.loads``，失败返回 None 而不抛异常。"""
     try:
         obj = json.loads(text)

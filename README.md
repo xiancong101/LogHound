@@ -1,10 +1,10 @@
-# LogHawk
+# LogHound
 
-LogHawk 是一个用 Python 写的日志异常检测与告警引擎：解析 Nginx / SSH / JSON 日志，用 YAML 规则 + 统计基线检测攻击行为，并输出告警到控制台、Webhook、SQLite 或 Prometheus。
+LogHound 是一个用 Python 写的日志异常检测与告警引擎：解析 Nginx / SSH / JSON 日志，用 YAML 规则 + 统计基线检测攻击行为，并输出告警到控制台、Webhook、SQLite 或 Prometheus。
 
 ```bash
 pip install -e .
-loghawk run samples/attack.log --rules rules/
+loghound run samples/attack.log --rules rules/
 # 输出示例：
 # [HIGH] 10:23:45 ip=10.0.0.5 rule=scanner_ua_sqlmap count=1 T1595.002
 # [HIGH] 10:23:57 ip=10.0.0.5 rule=webshell_access count=3 T1505.003
@@ -13,8 +13,8 @@ loghawk run samples/attack.log --rules rules/
 ## 目录结构
 
 ```
-LogHawk/
-├── loghawk/                 # 核心包
+LogHound/
+├── loghound/                 # 核心包
 │   ├── parser/              # 日志解析：三类日志 → 统一 dict 事件
 │   ├── rules/               # 规则引擎：YAML 加载、schema 校验、窗口检测
 │   ├── baseline/            # 统计基线：按 (ip, hour) 建基线 + 异常打分
@@ -42,11 +42,11 @@ pip install -e .
 ## CLI 命令
 
 ```bash
-loghawk parse samples/attack.log              # 只解析打印，调试用
-loghawk run samples/attack.log --rules rules/ # 全量检测并输出告警
-loghawk tail samples/attack.log --rules rules/ # 类似 tail -f 的实时检测
-loghawk rules list                            # 列出已加载规则
-loghawk eval                                  # 跑基线对比评估
+loghound parse samples/attack.log              # 只解析打印，调试用
+loghound run samples/attack.log --rules rules/ # 全量检测并输出告警
+loghound tail samples/attack.log --rules rules/ # 类似 tail -f 的实时检测
+loghound rules list                            # 列出已加载规则
+loghound eval                                  # 跑基线对比评估
 ```
 
 ## 规则编写教程
@@ -117,11 +117,11 @@ suppress:
 description: 一句话说清这条规则在检测什么。
 ```
 
-保存到 `rules/` 目录，运行 `loghawk rules list` 确认加载成功即可生效（已运行中的 `run`/`tail` 会通过热加载自动感知新规则）。
+保存到 `rules/` 目录，运行 `loghound rules list` 确认加载成功即可生效（已运行中的 `run`/`tail` 会通过热加载自动感知新规则）。
 
 ## 效果数据
 
-「固定阈值」在业务高峰时段容易把正常流量误判为攻击。LogHawk 的 baseline 模块按 `(ip, hour_of_day)` 建立请求量基线，用 z-score + 短时突增比综合打分来降低误报。
+「固定阈值」在业务高峰时段容易把正常流量误判为攻击。LogHound 的 baseline 模块按 `(ip, hour_of_day)` 建立请求量基线，用 z-score + 短时突增比综合打分来降低误报。
 
 下面的数字来自 `scripts/offline_eval.py` 在**合成数据**上的对比（`seed=42`，30 天 × 5 IP，共 3600 个观测点，其中 173 个攻击点）。复现方式：
 

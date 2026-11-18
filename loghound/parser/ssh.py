@@ -57,10 +57,10 @@ def parse_ssh(line: str) -> dict[str, Any] | None:
             )
 
     # —— 备通道：分隔符切分 ——
-    return _parse_ssh_by_split(raw)
+    return _parse_by_split(raw)
 
 
-def _parse_ssh_by_split(raw: str) -> dict[str, Any] | None:
+def _parse_by_split(raw: str) -> dict[str, Any] | None:
     """分隔符切分兜底：定位 ``from <ip>`` 与 ``port <n>`` 提取来源 IP。"""
     tokens = raw.split()
     # 时间 = 前 3 个 token 拼接（Mar 12 10:23:45）
