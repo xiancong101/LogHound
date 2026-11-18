@@ -23,17 +23,22 @@ dist/
 .coverage
 htmlcov/
 
-# 生成的假数据
+# 生成的假数据（用 scripts/make_fake_logs.py 自己生成）
 data/
+
+# 运行产物
+*.log
+loghound.db
+alerts.jsonl
 
 # IDE / 编辑器
 .idea/
 .vscode/
 *.swp
 
-# 其他
+# 系统
 .DS_Store
 
-# local scratch scripts
+# 本地临时脚本
 _*.py
-_git_before.txt
+verify_*.py
