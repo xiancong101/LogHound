@@ -17,6 +17,7 @@ from pathlib import Path
 
 from config import Config, load_config
 
+from loghound import __version__
 from loghound.output import (
     ConsoleOutput,
     MetricsOutput,
@@ -34,6 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
         prog="loghound",
         description="日志异常检测与告警引擎",
     )
+    parser.add_argument("--version", action="version", version=f"loghound {__version__}")
     parser.add_argument("--config", default="config.yaml", help="配置文件路径（默认 config.yaml）")
 
     sub = parser.add_subparsers(dest="command", required=True)
